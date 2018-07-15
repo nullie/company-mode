@@ -1222,14 +1222,7 @@ can retrieve meta-data for them."
           ;; Save in cache.
           (push (cons prefix candidates) company-candidates-cache)))
     ;; Only now apply the predicate and transformers.
-    (setq candidates (company--postprocess-candidates candidates))
-    (when candidates
-      (if (or (cdr candidates)
-              (not (eq t (compare-strings (car candidates) nil nil
-                                          prefix nil nil ignore-case))))
-          candidates
-        ;; Already completed and unique; don't start.
-        t))))
+    (company--postprocess-candidates candidates)))
 
 (defun company--fetch-candidates (prefix)
   (let* ((non-essential (not (company-explicit-action-p)))
